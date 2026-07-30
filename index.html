@@ -13,119 +13,114 @@
 --text:#e8e8f0;--text2:#9898b0;--text3:#6868a0;
 --border:rgba(108,92,231,0.15);
 }
-html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
 
-/* SLIDE SYSTEM */
-.slide{min-height:100vh;padding:60px 80px;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:1px solid var(--border)}
-.slide-counter{position:absolute;top:40px;right:80px;font-size:12px;letter-spacing:3px;color:var(--text3);text-transform:uppercase;font-weight:500}
+/* SLIDE DECK */
+.deck{position:relative;width:100%;height:100vh}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;padding:50px 80px;display:flex;flex-direction:column;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s ease,transform 0.4s ease;transform:translateX(40px);overflow-y:auto}
+.slide.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.slide-counter{position:absolute;top:30px;right:80px;font-size:12px;letter-spacing:3px;color:var(--text3);text-transform:uppercase;font-weight:500}
 .slide-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;font-weight:600}
-.slide-title{font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.15;margin-bottom:12px;background:linear-gradient(135deg,#fff 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.slide-subtitle{font-size:16px;color:var(--text2);max-width:700px;line-height:1.6;margin-bottom:40px}
+.slide-title{font-size:clamp(26px,3.5vw,38px);font-weight:800;line-height:1.15;margin-bottom:10px;background:linear-gradient(135deg,#fff 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.slide-subtitle{font-size:15px;color:var(--text2);max-width:700px;line-height:1.6;margin-bottom:32px}
 
-/* HERO SLIDE */
+/* HERO */
 .hero{background:radial-gradient(ellipse at 20% 50%,rgba(108,92,231,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,206,201,0.05) 0%,transparent 50%),var(--bg)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:100px;padding:8px 20px;font-size:13px;color:var(--accent2);font-weight:500;margin-bottom:32px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:100px;padding:6px 18px;font-size:12px;color:var(--accent2);font-weight:500;margin-bottom:24px}
 .hero-badge span{width:6px;height:6px;background:var(--accent3);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.hero-title{font-size:clamp(36px,5vw,56px);font-weight:800;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#ffffff 0%,var(--accent2) 60%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{font-size:18px;color:var(--text2);margin-bottom:48px}
+.hero-title{font-size:clamp(32px,4.5vw,50px);font-weight:800;line-height:1.1;margin-bottom:12px;background:linear-gradient(135deg,#ffffff 0%,var(--accent2) 60%,var(--accent3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:16px;color:var(--text2);margin-bottom:36px}
 
 /* METRIC CARDS */
-.metrics-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:32px}
-.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;overflow:hidden;transition:transform 0.2s}
-.metric-card:hover{transform:translateY(-2px)}
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;position:relative;overflow:hidden}
 .metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent3))}
-.metric-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;font-weight:500}
-.metric-value{font-size:clamp(28px,3.5vw,40px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:4px}
+.metric-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;font-weight:500}
+.metric-value{font-size:clamp(24px,3vw,36px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:3px}
 .metric-value.accent{color:var(--accent2)}
 .metric-value.green{color:var(--accent3)}
 .metric-value.yellow{color:var(--accent4)}
-.metric-detail{font-size:13px;color:var(--text2);line-height:1.5}
+.metric-detail{font-size:12px;color:var(--text2);line-height:1.4}
 .metric-card.highlight{border-color:var(--accent);background:linear-gradient(135deg,rgba(108,92,231,0.08),var(--surface))}
 
 /* TABLES */
-.data-table{width:100%;border-collapse:collapse;margin:20px 0}
-.data-table th{text-align:left;padding:14px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);font-weight:600}
-.data-table td{padding:14px 16px;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0}
+.data-table th{text-align:left;padding:10px 14px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);font-weight:600}
+.data-table td{padding:10px 14px;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
 .data-table tr:hover td{background:rgba(108,92,231,0.04)}
 .data-table .num{font-weight:700;font-variant-numeric:tabular-nums}
-.data-table .bar-cell{width:120px}
-.bar-wrap{background:var(--surface2);border-radius:4px;height:8px;overflow:hidden}
-.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent3));transition:width 0.6s ease}
+.data-table .bar-cell{width:100px}
+.bar-wrap{background:var(--surface2);border-radius:4px;height:7px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent3))}
 
-/* MONTH TREND */
-.trend-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:20px 0}
-.trend-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;position:relative}
+/* TREND CARDS */
+.trend-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:16px 0}
+.trend-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;position:relative}
 .trend-card.best{border-color:var(--accent3);background:linear-gradient(135deg,rgba(0,206,201,0.08),var(--surface))}
-.trend-card.best::after{content:'★ Best';position:absolute;top:8px;right:8px;font-size:10px;color:var(--accent3);font-weight:700;letter-spacing:1px}
-.trend-month{font-size:13px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.trend-value{font-size:28px;font-weight:800;color:#fff;margin-bottom:4px}
-.trend-sub{font-size:12px;color:var(--text2)}
+.trend-card.best::after{content:'★ Best';position:absolute;top:6px;right:8px;font-size:9px;color:var(--accent3);font-weight:700;letter-spacing:1px}
+.trend-month{font-size:12px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.trend-value{font-size:26px;font-weight:800;color:#fff;margin-bottom:3px}
+.trend-sub{font-size:11px;color:var(--text2)}
 
 /* INSIGHT BOX */
-.insight-box{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0}
-.insight-box h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;font-weight:600}
-.insight-box p{font-size:14px;color:var(--text2);line-height:1.7}
+.insight-box{background:var(--surface);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:16px 20px;margin:18px 0}
+.insight-box h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:6px;font-weight:600}
+.insight-box p{font-size:13px;color:var(--text2);line-height:1.65}
 .insight-box strong{color:#fff;font-weight:600}
 
-/* CONCERN BOX */
-.concern-box{background:linear-gradient(135deg,rgba(225,112,85,0.06),var(--surface));border-left:3px solid var(--red);border-radius:0 12px 12px 0;padding:20px 24px;margin:16px 0}
-.concern-box h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:600}
-.concern-box p{font-size:14px;color:var(--text2);line-height:1.7}
-
-/* DOMAIN BARS */
-.domain-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0}
-.domain-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center}
+/* DOMAIN */
+.domain-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}
+.domain-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
 .domain-card.top{border-color:var(--accent3)}
-.domain-name{font-size:13px;color:var(--text2);margin-bottom:6px;font-weight:500}
-.domain-cvr{font-size:32px;font-weight:800;color:#fff}
-.domain-detail{font-size:12px;color:var(--text3);margin-top:4px}
+.domain-name{font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.domain-cvr{font-size:28px;font-weight:800;color:#fff}
+.domain-detail{font-size:11px;color:var(--text3);margin-top:3px}
 
-/* TWO COLUMNS */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+/* TWO COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
 
-/* PIE-STYLE STATS */
-.stat-block{margin:8px 0}
-.stat-row{display:flex;align-items:center;gap:12px;margin:10px 0}
-.stat-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
-.stat-label{font-size:13px;color:var(--text2);flex:1}
-.stat-val{font-size:14px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+/* STATS */
+.stat-block{margin:6px 0}
+.stat-row{display:flex;align-items:center;gap:10px;margin:8px 0}
+.stat-dot{width:9px;height:9px;border-radius:3px;flex-shrink:0}
+.stat-label{font-size:12px;color:var(--text2);flex:1}
+.stat-val{font-size:13px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
 
-/* NAV */
-.nav{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:6px;background:rgba(18,18,26,0.95);backdrop-filter:blur(12px);padding:8px 16px;border-radius:100px;border:1px solid var(--border);z-index:100}
-.nav a{width:10px;height:10px;border-radius:50%;background:var(--surface3);display:block;transition:all 0.3s}
-.nav a:hover,.nav a.active{background:var(--accent2);transform:scale(1.2)}
+/* NAVIGATION */
+.slide-nav{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;background:rgba(18,18,26,0.95);backdrop-filter:blur(12px);padding:10px 24px;border-radius:100px;border:1px solid var(--border);z-index:100}
+.slide-nav button{background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:8px;transition:all 0.2s;font-family:'Inter',sans-serif}
+.slide-nav button:hover{color:#fff;background:var(--surface3)}
+.slide-nav button:disabled{opacity:0.2;cursor:default}
+.slide-nav button:disabled:hover{background:none;color:var(--text2)}
+.slide-nav .counter{font-size:13px;color:var(--text2);font-weight:600;letter-spacing:1px;min-width:50px;text-align:center}
+.nav-dots{display:flex;gap:6px}
+.nav-dots span{width:8px;height:8px;border-radius:50%;background:var(--surface3);cursor:pointer;transition:all 0.3s}
+.nav-dots span.active{background:var(--accent2);transform:scale(1.3)}
+
+/* T500 LOGO */
+.t500-mark{position:absolute;top:30px;left:80px;font-size:14px;font-weight:800;color:var(--accent2);letter-spacing:2px}
 
 /* RESPONSIVE */
 @media(max-width:768px){
-.slide{padding:40px 24px}
-.slide-counter{right:24px;top:24px}
+.slide{padding:30px 24px}
+.slide-counter{right:24px;top:20px}
+.t500-mark{left:24px;top:20px}
 .metrics-row{grid-template-columns:1fr 1fr}
 .trend-row{grid-template-columns:repeat(3,1fr)}
 .domain-row{grid-template-columns:1fr 1fr}
 .two-col{grid-template-columns:1fr}
 }
-@media(max-width:480px){
-.metrics-row{grid-template-columns:1fr}
-.trend-row{grid-template-columns:1fr 1fr}
-}
 </style>
 </head>
 <body>
 
-<!-- NAV DOTS -->
-<nav class="nav" id="nav">
-<a href="#s1" title="Overview"></a>
-<a href="#s2" title="Domain Analysis"></a>
-<a href="#s3" title="Role Performance"></a>
-<a href="#s4" title="Audience"></a>
-<a href="#s5" title="Lead Volume"></a>
-<a href="#s6" title="Revenue"></a>
-</nav>
+<div class="deck" id="deck">
 
-<!-- ===================== SLIDE 1: OVERVIEW ===================== -->
-<section class="slide hero" id="s1">
+<!-- SLIDE 1: OVERVIEW -->
+<section class="slide hero active" data-slide="0">
+<div class="t500-mark">T500</div>
 <div class="slide-counter">01 of 06 · Overview</div>
 <div class="hero-badge"><span></span> Updated Jul 30, 2026</div>
 <h1 class="hero-title">Talent500 Deep Dive</h1>
@@ -144,7 +139,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 </div>
 <div class="metric-card">
 <div class="metric-label">Net Revenue Generated</div>
-<div class="metric-value green">₹2.96 Cr*</div>
+<div class="metric-value green">₹2.96 Cr</div>
 <div class="metric-detail">Avg ticket size ₹1.60L per enrollment</div>
 </div>
 <div class="metric-card">
@@ -179,12 +174,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 
 <div class="insight-box">
 <h4>Channel Context</h4>
-<p>Talent500 is a <strong>webinar-led inbound channel</strong> targeting mid-to-senior tech professionals (5–20 yrs exp). Funnel: webinar registration → attendance → sales call → enrollment. <strong>July delivered the best sales (53) and highest CVR (2.84%)</strong>, confirming the channel's growth trajectory. *Jul revenue estimated at avg ticket ₹1.60L.</p>
+<p>Talent500 is a <strong>webinar-led inbound channel</strong> targeting mid-to-senior tech professionals (5–20 yrs exp). Funnel: webinar registration → attendance → sales call → enrollment. <strong>July delivered the best sales (53) and highest CVR (2.84%)</strong>, confirming the channel's growth trajectory. </p>
 </div>
 </section>
 
-<!-- ===================== SLIDE 2: DOMAIN ANALYSIS ===================== -->
-<section class="slide" id="s2">
+<!-- SLIDE 2: DOMAIN ANALYSIS -->
+<section class="slide" data-slide="1">
+<div class="t500-mark">T500</div>
 <div class="slide-counter">02 of 06 · Domain Analysis</div>
 <div class="slide-label">Domain Analysis</div>
 <h2 class="slide-title">Which Domain Converts Best?</h2>
@@ -213,11 +209,6 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 </div>
 </div>
 
-<div class="insight-box">
-<h4>Strategic Implication</h4>
-<p><strong>Management converts at ~1.6× the rate of SWE</strong>, yet SWE is the largest segment (36.6% of leads). A 0.5% lift in SWE conversion would add ~15 sales/month. Systems remains the weakest segment at 1.49% but represents only 12% of volume.</p>
-</div>
-
 <table class="data-table">
 <thead><tr><th>Domain</th><th>Leads</th><th>% Share</th><th>Sales (est.)</th><th>CVR</th><th class="bar-cell">Conv. Bar</th></tr></thead>
 <tbody>
@@ -229,12 +220,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 </table>
 </section>
 
-<!-- ===================== SLIDE 3: ROLE PERFORMANCE ===================== -->
-<section class="slide" id="s3">
+<!-- SLIDE 3: ROLE PERFORMANCE -->
+<section class="slide" data-slide="2">
+<div class="t500-mark">T500</div>
 <div class="slide-counter">03 of 06 · Role Performance</div>
 <div class="slide-label">Role Performance</div>
 <h2 class="slide-title">Top 5 High-Converting Roles</h2>
-<p class="slide-subtitle">Specific roles ranked by lead-to-sale conversion rate (min. 50 leads). Shows which roles have highest purchase intent — key for targeting and content strategy.</p>
+<p class="slide-subtitle">Specific roles ranked by lead-to-sale conversion rate (min. 50 leads). Key for targeting and content strategy.</p>
 
 <div class="trend-row">
 <div class="trend-card best">
@@ -266,44 +258,43 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 
 <div class="insight-box">
 <h4>Key Insight</h4>
-<p><strong>ML/AI leads convert at 4.15%</strong> — nearly double the overall 2.21%. TPM has the highest raw sales volume (~29) at a strong 3.18%. The top 5 roles together generate the majority of total sales from under half the leads — a clear signal on where to prioritize outreach and webinar content.</p>
+<p><strong>ML/AI leads convert at 4.15%</strong> — nearly double the overall 2.28%. TPM has the highest raw sales volume (~29) at a strong 3.18%. The top 5 roles together generate the majority of total sales from under half the leads — a clear signal on where to prioritize outreach and webinar content.</p>
 </div>
 </section>
 
-<!-- ===================== SLIDE 4: AUDIENCE ===================== -->
-<section class="slide" id="s4">
+<!-- SLIDE 4: AUDIENCE -->
+<section class="slide" data-slide="3">
+<div class="t500-mark">T500</div>
 <div class="slide-counter">04 of 06 · Audience</div>
 <div class="slide-label">Audience Profile</div>
 <h2 class="slide-title">Who Is the T500 Audience?</h2>
-<p class="slide-subtitle">Profile of 8,127 leads by domain category and years of work experience. Helps tailor webinar content, sales pitch, and product positioning.</p>
+<p class="slide-subtitle">Profile of 8,127 leads by domain category and years of work experience.</p>
 
 <div class="two-col">
 <div>
-<h3 style="font-size:14px;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px">Domain Split</h3>
+<h3 style="font-size:13px;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px">Domain Split</h3>
 <div class="stat-block">
 <div class="stat-row"><div class="stat-dot" style="background:var(--accent)"></div><div class="stat-label">SWE (Software Engineering)</div><div class="stat-val">36.6% <span style="color:var(--text3);font-weight:400">· 3,058</span></div></div>
 <div class="stat-row"><div class="stat-dot" style="background:var(--accent2)"></div><div class="stat-label">Management</div><div class="stat-val">28.8% <span style="color:var(--text3);font-weight:400">· 2,407</span></div></div>
 <div class="stat-row"><div class="stat-dot" style="background:var(--accent3)"></div><div class="stat-label">Data</div><div class="stat-val">23.0% <span style="color:var(--text3);font-weight:400">· 1,919</span></div></div>
 <div class="stat-row"><div class="stat-dot" style="background:var(--accent4)"></div><div class="stat-label">Systems</div><div class="stat-val">12.1% <span style="color:var(--text3);font-weight:400">· 1,008</span></div></div>
 </div>
-
-<div class="metrics-row" style="grid-template-columns:1fr 1fr;margin-top:24px">
-<div class="metric-card"><div class="metric-label">Dominant Domain</div><div class="metric-value" style="font-size:24px">SWE</div><div class="metric-detail">3,058 leads · 36.6% of total</div></div>
-<div class="metric-card"><div class="metric-label">SWE + Mgmt Combined</div><div class="metric-value" style="font-size:24px">65.4%</div><div class="metric-detail">5,465 leads — core T500 audience</div></div>
+<div class="metrics-row" style="grid-template-columns:1fr 1fr;margin-top:20px">
+<div class="metric-card"><div class="metric-label">Dominant Domain</div><div class="metric-value" style="font-size:22px">SWE</div><div class="metric-detail">3,058 leads · 36.6% of total</div></div>
+<div class="metric-card"><div class="metric-label">SWE + Mgmt Combined</div><div class="metric-value" style="font-size:22px">65.4%</div><div class="metric-detail">5,465 leads — core T500 audience</div></div>
 </div>
 </div>
 <div>
-<h3 style="font-size:14px;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px">Work Experience Split</h3>
+<h3 style="font-size:13px;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px">Work Experience Split</h3>
 <div class="stat-block">
 <div class="stat-row"><div class="stat-dot" style="background:var(--accent)"></div><div class="stat-label">9–15 yrs</div><div class="stat-val">40%</div></div>
 <div class="stat-row"><div class="stat-dot" style="background:var(--accent2)"></div><div class="stat-label">5–8 yrs</div><div class="stat-val">33%</div></div>
 <div class="stat-row"><div class="stat-dot" style="background:var(--accent3)"></div><div class="stat-label">16–20 yrs</div><div class="stat-val">15%</div></div>
 <div class="stat-row"><div class="stat-dot" style="background:var(--accent4)"></div><div class="stat-label">20+ yrs</div><div class="stat-val">10%</div></div>
 </div>
-
-<div class="metrics-row" style="grid-template-columns:1fr 1fr;margin-top:24px">
-<div class="metric-card"><div class="metric-label">Dominant Band</div><div class="metric-value" style="font-size:24px">9–15 yrs</div><div class="metric-detail">Mid-senior professionals · 40%</div></div>
-<div class="metric-card"><div class="metric-label">Senior (16+ yrs)</div><div class="metric-value" style="font-size:24px">~25%</div><div class="metric-detail">Significant senior segment</div></div>
+<div class="metrics-row" style="grid-template-columns:1fr 1fr;margin-top:20px">
+<div class="metric-card"><div class="metric-label">Dominant Band</div><div class="metric-value" style="font-size:22px">9–15 yrs</div><div class="metric-detail">Mid-senior professionals · 40%</div></div>
+<div class="metric-card"><div class="metric-label">Senior (16+ yrs)</div><div class="metric-value" style="font-size:22px">~25%</div><div class="metric-detail">Significant senior segment</div></div>
 </div>
 </div>
 </div>
@@ -314,8 +305,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 </div>
 </section>
 
-<!-- ===================== SLIDE 5: LEAD VOLUME ===================== -->
-<section class="slide" id="s5">
+<!-- SLIDE 5: LEAD VOLUME -->
+<section class="slide" data-slide="4">
+<div class="t500-mark">T500</div>
 <div class="slide-counter">05 of 06 · Lead Volume</div>
 <div class="slide-label">Lead Volume</div>
 <h2 class="slide-title">Leads Month-on-Month</h2>
@@ -355,7 +347,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 <p>After April's peak (1,913), volumes settled in the <strong>1,500–1,820 range</strong>. July is tracking at 1,869 as of Jul 30 — close to April levels. <strong>July also has the best CVR (2.84%)</strong>, suggesting higher lead quality. WhatsApp was added as a new source channel alongside email.</p>
 </div>
 <div>
-<h3 style="font-size:14px;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px">Webinar Attendance Trend</h3>
+<h3 style="font-size:13px;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px">Webinar Attendance Trend</h3>
 <div class="stat-block">
 <div class="stat-row"><div class="stat-label">Mar</div><div class="stat-val">50.0%</div></div>
 <div class="stat-row"><div class="stat-label">Apr</div><div class="stat-val">37.5%</div></div>
@@ -363,13 +355,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 <div class="stat-row"><div class="stat-label">Jun</div><div class="stat-val" style="color:var(--accent3)">55.9%</div></div>
 <div class="stat-row"><div class="stat-label">Jul</div><div class="stat-val" style="color:var(--accent3)">53.5%</div></div>
 </div>
-<p style="font-size:13px;color:var(--text3);margin-top:12px">Jun & Jul attendance rates are significantly above average, suggesting improved targeting or webinar quality.</p>
+<p style="font-size:12px;color:var(--text3);margin-top:10px">Jun & Jul attendance rates significantly above average, suggesting improved targeting or webinar quality.</p>
 </div>
 </div>
 </section>
 
-<!-- ===================== SLIDE 6: REVENUE ===================== -->
-<section class="slide" id="s6">
+<!-- SLIDE 6: REVENUE -->
+<section class="slide" data-slide="5">
+<div class="t500-mark">T500</div>
 <div class="slide-counter">06 of 06 · Revenue</div>
 <div class="slide-label">Revenue</div>
 <h2 class="slide-title">Sales Closed & Revenue Trend</h2>
@@ -399,7 +392,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 <div class="trend-card best">
 <div class="trend-month">July</div>
 <div class="trend-value" style="color:var(--accent3)">53</div>
-<div class="trend-sub">₹84.8L* · ↑23% sales vs Jun</div>
+<div class="trend-sub">₹84.8L · ↑23% sales vs Jun</div>
 </div>
 </div>
 
@@ -411,8 +404,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 </div>
 <div class="metric-card">
 <div class="metric-label">Est. Total Revenue</div>
-<div class="metric-value green">~₹2.96 Cr*</div>
-<div class="metric-detail">*Jul estimated at avg ticket ₹1.60L</div>
+<div class="metric-value green">~₹2.96 Cr</div>
+<div class="metric-detail">Jul at avg ticket ₹1.60L</div>
 </div>
 <div class="metric-card">
 <div class="metric-label">Annualized Run Rate</div>
@@ -427,23 +420,57 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 </div>
 </section>
 
+</div>
 
+<!-- SLIDE NAVIGATION -->
+<div class="slide-nav">
+<button id="prevBtn" onclick="changeSlide(-1)">←</button>
+<div class="nav-dots" id="navDots"></div>
+<span class="counter" id="slideCounter">1 / 6</span>
+<button id="nextBtn" onclick="changeSlide(1)">→</button>
+</div>
 
 <script>
-// Active nav dot on scroll
-const sections = document.querySelectorAll('.slide');
-const navLinks = document.querySelectorAll('.nav a');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const id = entry.target.id;
-      const link = document.querySelector(`.nav a[href="#${id}"]`);
-      if (link) link.classList.add('active');
-    }
-  });
-}, { threshold: 0.4 });
-sections.forEach(s => observer.observe(s));
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+const counter = document.getElementById('slideCounter');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const dotsContainer = document.getElementById('navDots');
+
+// Create dots
+for(let i = 0; i < total; i++){
+  const dot = document.createElement('span');
+  if(i === 0) dot.classList.add('active');
+  dot.onclick = () => goToSlide(i);
+  dotsContainer.appendChild(dot);
+}
+
+function goToSlide(n){
+  slides[current].classList.remove('active');
+  dotsContainer.children[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  dotsContainer.children[current].classList.add('active');
+  counter.textContent = (current + 1) + ' / ' + total;
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+}
+
+function changeSlide(dir){
+  const next = current + dir;
+  if(next >= 0 && next < total) goToSlide(next);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+  if(e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+});
+
+// Initial state
+prevBtn.disabled = true;
 </script>
 
 </body>
